@@ -1,0 +1,63 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* General_start */
+
+.section{
+    width: 100%;
+    background-color: #660000;
+}
+
+.container{
+    width: 1075px;
+    margin: auto;
+}
+
+/* General_end */
+
+
+/* Service_start */
+
+.service__items{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: #660000;
+    justify-content: space-between;
+}
+
+.item--service{
+    width: 225px;
+    height: 305px;
+    margin-top: 30px;
+    background-color: #ffffff; 
+}
+
+ /* Service_end */
+
+
+/* Work_start */
+
+.work__items{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: #660000;
+    justify-content: space-between;
+}
+
+.item--work{
+    width: 300px;
+    height: 200px;
+    margin-top: 30px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #ffffff;
+    background-color: #353535; 
+}
+
+ /* Work_end */
