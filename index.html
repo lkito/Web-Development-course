@@ -17,27 +17,27 @@
             </div>
             
             <div class="navbar__items__menu">
-                <div class="item--button--general">
+                <div class="item--navbar--button">
                     HOME
                 </div>
                 
-                <div class="item--button--general">
+                <div class="item--navbar--button">
                     STYLE DEMO
                 </div>
                 
-                <div class="item--button--general">
+                <div class="item--navbar--button">
                     FULL WIDTH
                 </div>
 
-                <div class="item--button--general">
+                <div class="item--navbar--button">
                     DROPDOWN
                 </div>
 
-                <div class="item--button--general">
+                <div class="item--navbar--button">
                     PORTFOLIO
                 </div>
 
-                <div class="item--button--general">
+                <div class="item--navbar--button">
                     GALLERY
                 </div>
             </div>
@@ -59,9 +59,7 @@
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. At adipisci dolor vitae culpa, impedit labore voluptatum distinctio neque dolorum, sint provident magnam. Mollitia maiores possimus qui repellendus laudantium? Rem, culpa?
                     </p>
                     
-                    <div class="item--button--general">
-                        Read More Here >
-                    </div>
+                    <input type="button" value="Read More Here >" class="item--button--general">
                 </div>
 
                 <div class="item--slider--image">
@@ -77,23 +75,43 @@
     <div class="container--general">
         <div class="service__items">
             <div class="item--service">
-                <img class="item--service--image" src="/imgs/Rectangle.png" alt="">
-                <p>item1</p>
+                <div class="item--service__content">
+                    <div class="item--service__content_rectangle"></div>
+                    <h2 class="item--service__content__header">
+                        SERVICE TITLE
+                    </h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo perferendis, aut dolor quaerat similique quod!</p>
+                </div>
             </div>
             
             <div class="item--service">
-                <img class="item--service--image" src="/imgs/Rectangle.png" alt="">
-                <p>item1</p>
+                <div class="item--service__content">
+                    <div class="item--service__content_rectangle"></div>
+                    <h2 class="item--service__content__header">
+                        SERVICE TITLE
+                    </h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo perferendis, aut dolor quaerat similique quod!</p>
+                </div>
             </div>
             
             <div class="item--service">
-                <img class="item--service--image" src="/imgs/Rectangle.png" alt="">
-                <p>item1</p>
+                <div class="item--service__content">
+                    <div class="item--service__content_rectangle"></div>
+                    <h2 class="item--service__content__header">
+                        SERVICE TITLE
+                    </h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo perferendis, aut dolor quaerat similique quod!</p>
+                </div>
             </div>
 
             <div class="item--service">
-                <img class="item--service--image" src="/imgs/Rectangle.png" alt="">
-                <p>item1</p>
+                <div class="item--service__content">
+                    <div class="item--service__content_rectangle"></div>
+                    <h2 class="item--service__content__header">
+                        SERVICE TITLE
+                    </h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo perferendis, aut dolor quaerat similique quod!</p>
+                </div>
             </div>
         </div>
     </div>    
@@ -103,37 +121,49 @@
     <div class="container--general">
         <div class="work--header__items">
             <div class="item--work--header">
-                LATEST WORK
+                <h2>LATEST WORK</h2>
             </div>
         </div>
     </div>    
 </section>
 
-<section class="section--general">
+<section class="section--general section--work">
     <div class="container--general">
         <div class="work__items">
             <div class="item--work">
-                item1
+                <div class="item--work__title">
+                    Lorem, ipsum dolor.
+                </div>
             </div>
             
             <div class="item--work">
-                item2
+                <div class="item--work__title">
+                    Lorem, ipsum dolor.
+                </div>
             </div>
             
             <div class="item--work">
-                item3
+                <div class="item--work__title">
+                    Lorem, ipsum dolor.
+                </div>
             </div>
 
             <div class="item--work">
-                item4
+                <div class="item--work__title">
+                    Lorem, ipsum dolor.
+                </div>
             </div>
             
             <div class="item--work">
-                item5
+                <div class="item--work__title">
+                    Lorem, ipsum dolor.
+                </div>
             </div>
             
             <div class="item--work">
-                item6
+                <div class="item--work__title">
+                    Lorem, ipsum dolor.
+                </div>
             </div>
         </div>
     </div>
@@ -158,21 +188,27 @@
                 <div class="info__items__title">
                     Quick links
                 </div>
+                <div class=""></div>
                 <div class="info__items__link">
                     Link1 >
                 </div>
+                <div class="info__items__divison-line"></div>
                 <div class="info__items__link">
                     Link2 >
                 </div>
+                <div class="info__items__divison-line"></div>
                 <div class="info__items__link">
                     Link3 >
                 </div>
+                <div class="info__items__divison-line"></div>
                 <div class="info__items__link">
                     Link4 >
                 </div>
+                <div class="info__items__divison-line"></div>
                 <div class="info__items__link">
                     Link5 >
                 </div>
+                <div class="info__items__divison-line"></div>
             </div>
 
             <div class="info__items__column">
@@ -191,10 +227,11 @@
                 <div class="info__items__title">
                     Contact Us
                 </div>
-                <textarea class="info__items__textarea" placeholder="Full name" rows="1"></textarea>
-                <textarea class="info__items__textarea" placeholder="Email" rows="1"></textarea>
-                <textarea class="info__items__textarea" placeholder="Subject" rows="1"></textarea>
-                <textarea class="info__items__textarea" placeholder="Message" rows="4"></textarea>
+                <input type="text" class="info__items__input--text" placeholder="Full name" rows="1">
+                <input type="text" class="info__items__input--text" placeholder="Email" rows="1">
+                <input type="text" class="info__items__input--text" placeholder="Subject" rows="1">
+                <textarea class="info__items__input--text" placeholder="Message" rows="4"></textarea>
+                <input type="button" value="Enter" class="item--button--general info__items__input--button">
             </div>
         </div>
     </div>
