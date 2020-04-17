@@ -525,3 +525,37 @@
 
 /* Footer_end */
 
+
+/* Copyright_start */
+
+.section--copyright{
+    background-color: #1a1a1a;
+}
+
+.copyright__items{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 60px;
+}
+
+.copyright__items__text__left{
+    font-size: 12px;
+    line-height: 12px;
+    color: #999999;
+    font-family: "Georgia";
+    text-transform: capitalize;
+}
+
+.copyright__items__text__right{
+    font-size: 12px;
+    line-height: 12px;
+    color: #999999;
+    font-family: "Georgia";
+    text-align: right;
+    text-transform: capitalize;
+}
+
+/* Copyright_end */
+
