@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Georgia";
 }
 
 
@@ -84,7 +85,6 @@
     font-size: 12px;
     line-height: 14px;
     color: #ffffff;
-    font-family: "Georgia";
     outline: none;
     padding-left: 5px;
     text-transform: capitalize;
@@ -100,7 +100,6 @@
     font-size: 12px;
     line-height: 14px;
     color: #ffffff;
-    font-family: "Georgia";
 }
 /* Header: top part END */
 
@@ -122,7 +121,6 @@
 .header__items__bottom__logo__main-text{
     display: flex;
     color: #4a4a4a;
-    font-family: "Georgia";
     font-weight: 100;
 }
 
@@ -138,7 +136,6 @@
 .header__items__bottom__logo__sub-text{
     font-size: 12px;
     color: #999999;
-    font-family: "Georgia";
     text-transform: capitalize;
     line-height: 0px;
 }
@@ -155,7 +152,6 @@
     text-transform: uppercase;
     font-size: 12px;
     color: #999999;
-    font-family: "Georgia";
     height: 18px;
     justify-content: center;
     align-items: center;
@@ -232,24 +228,20 @@
     display: flex;
     flex-direction: column;
     justify-content: left;
-    width: 52%;
 }
 
 .slider__items__info__title{
     font-size: 42px;
     line-height: 50px;
     color: #4a4a4a;
-    font-family: "Georgia";
     text-transform: uppercase;
 }
 
 .slider__items__info__paragraph{
     width: 497px;
-    height: 64px;
     font-size: 16px;
     line-height: 22px;
     color: #999999;
-    font-family: "Georgia";
 }
 
 .slider__items__info__button{
@@ -257,7 +249,6 @@
     font-size: 16px;
     line-height: 16px;
     color: #ffffff;
-    font-family: "Georgia";
     width: 126px;
     height: 32px;
     border-radius: 10px;
@@ -310,14 +301,12 @@
     background-color: #353535;
     font-size: 20px;
     color: #ffffff;
-    font-family: "Georgia";
 }
 
 .intro__items__card__title{
     text-transform: uppercase;
     font-size: 16px;
     color: #4a4a4a;
-    font-family: "Georgia";
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -325,7 +314,6 @@
 .intro__items__card__text{
     font-size: 13px;
     color: #999999;
-    font-family: "Georgia";
     margin-bottom: 20px;
 }
 
@@ -337,7 +325,6 @@
     text-transform: uppercase;
     font-size: 13px;
     color: #ffffff;
-    font-family: "Georgia";
 
 }
 
@@ -355,7 +342,6 @@
     font-size: 22px;
     line-height: 31px;
     color: #666666;
-    font-family: "Georgia";
     text-align: center;
     font-style: italic;
     width: 80%;
@@ -391,7 +377,6 @@
     font-size: 12px;
     line-height: 12px;
     color: #ffffff;
-    font-family: "Georgia";
 }
 
 .service__items__card__info{
@@ -405,7 +390,6 @@
     font-size: 13px;
     line-height: 16px;
     color: #3bafbe;
-    font-family: "Georgia";
 }
 
 .service__items__card__info__text{
@@ -413,7 +397,6 @@
     font-size: 12px;
     line-height: 19px;
     color: #848c92;
-    font-family: "Georgia";
 }
 
 /* Service_end */
@@ -447,7 +430,6 @@
     font-size: 20px;
     line-height: 24px;
     color: #ffffff;
-    font-family: "Georgia";
     margin-bottom: 22px;
     text-transform: capitalize;
 }
@@ -456,7 +438,6 @@
     font-size: 12px;
     line-height: 19px;
     color: #999999;
-    font-family: "Georgia";
     text-transform: capitalize;
 }
 
@@ -468,7 +449,6 @@
     font-size: 12px;
     line-height: 14px;
     color: #3bafbe;
-    font-family: "Georgia";
     text-transform: capitalize;
 }
 
@@ -484,7 +464,6 @@
     font-size: 13px;
     line-height: 16px;
     color: #999999;
-    font-family: "Georgia";
     text-transform: capitalize;
     font-weight: bold;
 }
@@ -493,7 +472,6 @@
     font-size: 12px;
     line-height: 14px;
     color: #3bafbe;
-    font-family: "Georgia";
     text-align: right;
     margin-top: 15px;
     text-transform: capitalize;
@@ -519,7 +497,6 @@
     font-size: 13px;
     line-height: 21px;
     color: #ffffff;
-    font-family: "Georgia";
     font-style: bold;
 }
 
@@ -544,7 +521,6 @@
     font-size: 12px;
     line-height: 12px;
     color: #999999;
-    font-family: "Georgia";
     text-transform: capitalize;
 }
 
@@ -552,7 +528,6 @@
     font-size: 12px;
     line-height: 12px;
     color: #999999;
-    font-family: "Georgia";
     text-align: right;
     text-transform: capitalize;
 }
