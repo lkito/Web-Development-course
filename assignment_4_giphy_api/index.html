@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./responsiveness.css">
     <title>Giphy Search</title>
 </head>
 <body>
@@ -17,7 +18,7 @@
                     <!-- Search elements go here -->
                 </div>
                 <div class="search-panel__row">
-                    <input class="item--search seach-input" id="search-field" type="text" placeholder="Enter query...">
+                    <input class="item--search search-input" id="search-field" type="text" placeholder="Enter query...">
                     <input type="button" onclick="newSearch.addOption()" class="btn item--search btn--submit" value="Submit">
                     <input type="button" onclick="newSearch.searchTrending()" class="btn item--search btn--random" value="See what's trending">
                 </div>
@@ -35,5 +36,5 @@
     </section>
 </body>
 <!-- Need to have html elements ready for script to work -->
-<script type="text/javascript" src="./script.js"></script>
+<script type="module" src="./script.js"></script>
 </html>

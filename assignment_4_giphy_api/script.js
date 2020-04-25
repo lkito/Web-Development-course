@@ -1,3 +1,5 @@
+import config from "./config.js";
+
 class Search {
     
     /**
@@ -51,7 +53,10 @@ class Search {
     addOption(query=''){
         if(query == ''){ // If Empty, gets value from search bar.
             query = document.getElementById('search-field').value;
-            if(query == '' || JSON.parse(localStorage.getItem('optionList')).includes(query)) return;
+            if(query == '') return;
+            this.searchByInput(query); // Search for result even if option is already saved
+            // Check if we already have this option
+            if(JSON.parse(localStorage.getItem(config.optionList)).includes(query)) return;
             this._saveOptionInLS(query);
         }
 
@@ -115,7 +120,11 @@ class Search {
                 curNode.classList.add('item--gif')
                 const curImg = document.createElement('img');
                 curImg.src = entry.images.fixed_height.url;
+                const curRating = document.createElement('div');
+                curRating.classList.add('item--gif__rating')
+                curRating.innerText = 'Rating:' + entry.rating;
                 curNode.appendChild(curImg);
+                curNode.appendChild(curRating);
                 resultElem.appendChild(curNode);
             });
         }
@@ -127,9 +136,9 @@ class Search {
      * @param value Value to be saved in localstorage array
      */
     _saveOptionInLS(value){
-        const optionList = JSON.parse(localStorage.getItem('optionList'));
+        const optionList = JSON.parse(localStorage.getItem(config.optionList));
         optionList.push(value);
-        localStorage.setItem('optionList', JSON.stringify(optionList));
+        localStorage.setItem(config.optionList, JSON.stringify(optionList));
     }
 
     /**
@@ -138,16 +147,16 @@ class Search {
      * @param value Value to be deleted from localstorage array
      */
     _deleteOptionFromLS(value){
-        let optionList = JSON.parse(localStorage.getItem('optionList'));
+        let optionList = JSON.parse(localStorage.getItem(config.optionList));
         optionList = optionList.filter(e => e !== value)
-        localStorage.setItem('optionList', JSON.stringify(optionList));
+        localStorage.setItem(config.optionList, JSON.stringify(optionList));
     }
 
     /**
      * Adds search options that are saved in local storage in search bar.
      */
     _addOptionsFromLocalStorage(){
-        const optionList = JSON.parse(localStorage.getItem('optionList'));
+        const optionList = JSON.parse(localStorage.getItem(config.optionList));
         optionList.map(option => this.addOption(option));
     }
 }
@@ -173,5 +182,5 @@ function callDeleteRemotely(){
     this.parentNode.parentNode.removeChild(this.parentNode);
 }
 
-if(localStorage.getItem('optionList') == null) localStorage.setItem('optionList', '[]');
-let newSearch = new Search('https://api.giphy.com/v1/gifs/search?', 'https://api.giphy.com/v1/gifs/trending?', 'aFFKTuSMjd6j0wwjpFCPXZipQbcnw3vB', 10);
+if(['', '[]', null].includes(localStorage.getItem(config.optionList))) localStorage.setItem(config.optionList, JSON.stringify(config.defaultOptions));
+let newSearch = new Search(config.url, config.trendingUrl, config.apiKey, config.limit);
