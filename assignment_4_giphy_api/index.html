@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Giphy Search</title>
+</head>
+<body>
+    <section class="section--general">
+        <div class="container--general">
+            <div class="search-panel">
+                <div class="search-panel__row">
+                    <h1>Giphy API Example</h1>
+                </div>
+                <div id="search-options" class="search-panel__row">
+                    <!-- Search elements go here -->
+                </div>
+                <div class="search-panel__row">
+                    <input class="item--search seach-input" id="search-field" type="text" placeholder="Enter query...">
+                    <input type="button" onclick="newSearch.addOption()" class="btn item--search btn--submit" value="Submit">
+                    <input type="button" onclick="newSearch.searchTrending()" class="btn item--search btn--random" value="See what's trending">
+                </div>
+            </div>
+            <div class="item--border"></div>
+        </div>
+    </section>
+    <section class="section--general">
+        <div class="container--general container--results">
+            <div id="search-results" class="search-results__items">
+                
+            </div>
+
+        </div>
+    </section>
+</body>
+<!-- Need to have html elements ready for script to work -->
+<script type="text/javascript" src="./script.js"></script>
+</html>
