@@ -1,21 +1,21 @@
 import config from "./config.js";
+import StorageManager from "./storageManager.js";
 
 class Search {
     
     /**
-     * Costructor. Memorizes data source and API key.
-     * 
-     * @param url string of url of the data source
-     * @param trendingUrl string of url of the trending gifs data source
-     * @param apiKey API key for the data source
-     * @param limit maximum number of objects that should be fetched.
+     * Initialize page elements.
      */
-    constructor(url, trendingUrl, apiKey, limit){
-        this._url = url;
-        this._trendingUrl = trendingUrl;
-        this._apiKey = apiKey;
-        this._limit = limit;
-        this._addOptionsFromLocalStorage(); // Load stored options
+    static initialize(){
+        const submitElem = document.getElementById('submit-button');
+        submitElem.addEventListener('click', function(){
+            Search.addOption();
+        });
+        const randElem = document.getElementById('random-button');
+        randElem.addEventListener('click', function(){
+            Search.searchTrending();
+        });
+        Search._addOptionsFromLocalStorage(); // Load stored options
     }
 
     /**
@@ -24,24 +24,24 @@ class Search {
      * 
      * @param query Text to search by from input.
      */
-    async searchByInput(query){
+    static async searchByInput(query){
         const resultElem = document.getElementById('search-results');
         if(query == ''){ // Return no results if query is empty
             resultElem.innerHTML = '';
             return;
         }
-        const data = await this._pullData(query);
-        this._drawResult(data, resultElem);
+        const data = await Search._pullData(query);
+        Search._drawResult(data, resultElem);
     }
 
     /**
      * Fetch trending gifs.
      * Called when trending button is pressed.
      */
-    async searchTrending(){
+    static async searchTrending(){
         const resultElem = document.getElementById('search-results');
-        const data = await this._pullData('');
-        this._drawResult(data, resultElem);
+        const data = await Search._pullData('');
+        Search._drawResult(data, resultElem);
     }
 
     /**
@@ -50,35 +50,16 @@ class Search {
      * 
      * @param query name of new option.
      */
-    addOption(query=''){
+    static addOption(query=''){
         if(query == ''){ // If Empty, gets value from search bar.
             query = document.getElementById('search-field').value;
             if(query == '') return;
-            this.searchByInput(query); // Search for result even if option is already saved
+            Search.searchByInput(query); // Search for result even if option is already saved
             // Check if we already have this option
             if(JSON.parse(localStorage.getItem(config.optionList)).includes(query)) return;
-            this._saveOptionInLS(query);
+            StorageManager.saveOptionInLS(query);
         }
-
-        const resultElem = document.getElementById('search-options');
-        const wrapper = document.createElement('div'); // Wrapper element
-        wrapper.className = 'item--search-wrapper';
-
-        const curNode = document.createElement('input'); // Option button
-        curNode.type = 'button';
-        curNode.addEventListener('click', callSearchRemotely, false);
-        curNode.className = 'btn item--search search-option';
-        curNode.value = query;
-
-        const deleteButton = document.createElement('input'); // Option delete button
-        deleteButton.type = 'button';
-        deleteButton.addEventListener('click', callDeleteRemotely, false);
-        deleteButton.className = 'btn item--search__delete';
-        deleteButton.value = 'X';
-        wrapper.appendChild(deleteButton);
-
-        wrapper.appendChild(curNode);
-        resultElem.appendChild(wrapper);
+        Search._drawOption(query);
     }
 
 
@@ -92,16 +73,70 @@ class Search {
      * @param query string to search gifs by; Pass empty string to fetch trending gifs.
      * @returns array of resulting objects
      */
-    async _pullData(query) {
+    static async _pullData(query) {
         const u = new URLSearchParams();
         u.append('method', 'GET');
-        u.append('api_key', this._apiKey);
+        u.append('api_key', config.apiKey);
         u.append('format', 'json');
-        u.append('limit', this._limit);
+        u.append('limit', config.limit);
         if(query != '') u.append('q', query);
-        const response = await fetch((query == '' ? this._trendingUrl : this._url) + u);
+        const response = await fetch((query == '' ? config.trendingUrl : config.url) + u);
         const result = await response.json();
         return result.data;
+    }
+
+    /**
+     * Creates and returns delete button element
+     * 
+     * @param query name of the added option
+     */
+    static _getDeleteElem(query){
+        const deleteButton = document.createElement('input'); // Option delete button
+        deleteButton.type = 'button';
+        deleteButton.addEventListener('click', function(){
+            const childArray = Array.from(this.parentNode.childNodes);
+            childArray.map(child => {
+                if(Array.from(child.classList).includes('search-option')) StorageManager.deleteOptionFromLS(child.value);
+            });
+            this.parentNode.parentNode.removeChild(this.parentNode);
+        });
+        deleteButton.className = 'btn item--search__delete';
+        deleteButton.value = 'X';
+        return deleteButton;
+    }
+
+    /**
+     * Creates and returns option element
+     * 
+     * @param query name of the added option
+     */
+    static _getOptionElem(query){
+        const curNode = document.createElement('input'); // Option button
+        curNode.type = 'button';
+        curNode.addEventListener('click', function(){
+            Search.searchByInput(this.value);
+        });
+        curNode.className = 'btn item--search search-option';
+        curNode.value = query;
+        return curNode;
+    }
+
+    /**
+     * Draws result option on page.
+     * 
+     * @param query name of the added option
+     */
+    static _drawOption(query){
+        const resultElem = document.getElementById('search-options'); // Parent element
+
+        const wrapper = document.createElement('div'); // Wrapper element
+        wrapper.className = 'item--search-wrapper';
+        const curNode = Search._getOptionElem(query)
+        const deleteButton = Search._getDeleteElem(query);
+
+        wrapper.appendChild(deleteButton);
+        wrapper.appendChild(curNode);
+        resultElem.appendChild(wrapper);
     }
 
     /**
@@ -110,7 +145,7 @@ class Search {
      * @param data result objects(gifs).
      * @param resultElem element where gifs should be written
      */
-    _drawResult(data, resultElem){
+    static _drawResult(data, resultElem){
         if(data.length == 0){
             resultElem.innerHTML = 'No matching gifs found';
         } else { // Show every matching result
@@ -131,56 +166,13 @@ class Search {
     }
 
     /**
-     * Save option to local storage.
-     * 
-     * @param value Value to be saved in localstorage array
-     */
-    _saveOptionInLS(value){
-        const optionList = JSON.parse(localStorage.getItem(config.optionList));
-        optionList.push(value);
-        localStorage.setItem(config.optionList, JSON.stringify(optionList));
-    }
-
-    /**
-     * Delete option from local storage.
-     * 
-     * @param value Value to be deleted from localstorage array
-     */
-    _deleteOptionFromLS(value){
-        let optionList = JSON.parse(localStorage.getItem(config.optionList));
-        optionList = optionList.filter(e => e !== value)
-        localStorage.setItem(config.optionList, JSON.stringify(optionList));
-    }
-
-    /**
      * Adds search options that are saved in local storage in search bar.
      */
-    _addOptionsFromLocalStorage(){
+    static _addOptionsFromLocalStorage(){
         const optionList = JSON.parse(localStorage.getItem(config.optionList));
-        optionList.map(option => this.addOption(option));
+        optionList.map(option => Search.addOption(option));
     }
 }
 
-/**
- * Function that is called when an element is clicked.
- * Calls method 'searchByInput()' of the class instance created.
- */
-function callSearchRemotely(){
-    newSearch.searchByInput(this.value);
-}
-
-/**
- * Function that is called when an (delete)element is clicked.
- * Calls method '_deleteOptionFromLS()' of the class instance created.
- * Also deletes search entry from local storage
- */
-function callDeleteRemotely(){
-    const childArray = Array.from(this.parentNode.childNodes);
-    childArray.map(child => {
-        if(Array.from(child.classList).includes('search-option')) newSearch._deleteOptionFromLS(child.value);
-    });
-    this.parentNode.parentNode.removeChild(this.parentNode);
-}
-
-if(['', '[]', null].includes(localStorage.getItem(config.optionList))) localStorage.setItem(config.optionList, JSON.stringify(config.defaultOptions));
-let newSearch = new Search(config.url, config.trendingUrl, config.apiKey, config.limit);
+StorageManager.updateOptionsInLS(); // Check options in localstorage
+Search.initialize(); // Initialize important details on page.

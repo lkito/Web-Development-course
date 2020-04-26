@@ -19,8 +19,8 @@
                 </div>
                 <div class="search-panel__row">
                     <input class="item--search search-input" id="search-field" type="text" placeholder="Enter query...">
-                    <input type="button" onclick="newSearch.addOption()" class="btn item--search btn--submit" value="Submit">
-                    <input type="button" onclick="newSearch.searchTrending()" class="btn item--search btn--random" value="See what's trending">
+                    <input id="submit-button" type="button" class="btn item--search btn--submit" value="Submit">
+                    <input id="random-button" type="button" class="btn item--search btn--random" value="See what's trending">
                 </div>
             </div>
             <div class="item--border"></div>
@@ -29,9 +29,8 @@
     <section class="section--general">
         <div class="container--general container--results">
             <div id="search-results" class="search-results__items">
-                
+                <!-- GIFs go here -->
             </div>
-
         </div>
     </section>
 </body>
