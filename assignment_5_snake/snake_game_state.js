@@ -17,6 +17,7 @@ class SnakeGameState {
         this._rectSize = rectSize;
         this._screenObject = screenObject;
         this._currentSnakeState = JSON.parse(JSON.stringify(snakeState)); // Deepcopy object
+        this._nextDirection = this._currentSnakeState.curDirection;
         this._currentScore = 0;
         document.getElementById(config.scoreDisplayID).innerHTML = 'score: 0';
         this._food = {
@@ -41,7 +42,7 @@ class SnakeGameState {
         ){
             return;
         }
-        this._currentSnakeState.curDirection = direction;
+        this._nextDirection = direction; // Save in separate variable to avoid errors
     }
 
     /**
@@ -56,6 +57,7 @@ class SnakeGameState {
         // Last state of head
         let newRow = this._currentSnakeState.body[0].row;
         let newCol = this._currentSnakeState.body[0].col;
+        this._currentSnakeState.curDirection = this._nextDirection;
         switch(this._currentSnakeState.curDirection){ // Get new position
             case config.dirTop:
                 newRow--;

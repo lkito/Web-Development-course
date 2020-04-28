@@ -13,11 +13,6 @@ var isRunning = false;
 
 //                                                  INITIALIZATION OF USER CONTROLS BELOW THIS LINE
 
-document.addEventListener('keydown', logKey); // Add arrow command functionality to the game
-function logKey(e){
-    game.updateDirection(`${e.code}`);
-};
-
 function displayResult(score){
     let displayText = 'You died!\nYour score: ' + score + '\nRecord score: ' + SnakeGameState.getMaxScore(); 
     alert(displayText);
@@ -64,3 +59,23 @@ const pauseButton = document.getElementById('pause-button');
 pauseButton.addEventListener('click', function(){
     pauseGame();
 });
+
+document.addEventListener('keydown', logKey); // Add arrow command functionality to the game
+function logKey(e){
+    const curKey = `${e.code}`;
+    if([config.dirTop, config.dirDown, config.dirLeft, config.dirRight].includes(curKey)){
+        game.updateDirection(curKey);
+    } else {
+        switch(curKey){
+            case 'KeyP':
+                pauseGame();
+                break;
+            case 'KeyS':
+                startPlaying();
+                break;
+            case 'KeyR':
+                reset();
+                break;
+        }
+    }
+};
