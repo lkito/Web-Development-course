@@ -61,8 +61,8 @@ body{
 
 .game-screen{
     position: relative;
-    width: 500px;
-    height: 500px;
+    width: 543px;
+    height: 543px;
     background-color: white;
     border: solid rgb(102, 85, 119) 12px;
 }
