@@ -14,7 +14,9 @@ const config = {
     snakeColor: 'blue',
     foodColor: 'red',
     rectClassName: 'game-screen__game-character',
-    screenElemID: 'snake-game-screen'
+    screenElemID: 'snake-game-screen',
+    scoreDisplayID: 'score-display',
+    ticRate: 100        // Game speed
 };
 
 export default config; 

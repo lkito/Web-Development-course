@@ -67,6 +67,12 @@ body{
     border: solid rgb(102, 85, 119) 12px;
 }
 
+.game-screen__score-display{
+    position: absolute;
+    left: 10px;
+    bottom: 2px;
+}
+
 .game-screen__game-character{
     position: absolute;
     width: 12px;

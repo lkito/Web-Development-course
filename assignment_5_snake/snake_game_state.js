@@ -18,6 +18,7 @@ class SnakeGameState {
         this._screenObject = screenObject;
         this._currentSnakeState = JSON.parse(JSON.stringify(snakeState)); // Deepcopy object
         this._currentScore = 0;
+        document.getElementById(config.scoreDisplayID).innerHTML = 'score: 0';
         this._food = {
             row: 0,
             col: 0,
@@ -28,14 +29,21 @@ class SnakeGameState {
     }
 
     /**
-     * Saves new direction for the next step
+     * Saves new direction for the next step, if it's valid
      * 
      * @param {string} direction New direction
      */
     updateDirection(direction){
+        const curDirection = this._currentSnakeState.curDirection;
+        if( // Check if new direction is an opposite of the old one
+            ([config.dirTop, config.dirDown].includes(direction) && [config.dirTop, config.dirDown].includes(curDirection)) ||
+            ([config.dirLeft, config.dirRight].includes(direction) && [config.dirLeft, config.dirRight].includes(curDirection))
+        ){
+            return;
+        }
         this._currentSnakeState.curDirection = direction;
     }
-    
+
     /**
      * Simulates one turn of playing. Moves snake by one tile.
      * If snake dies, calls stopGame() and returns score.
@@ -64,8 +72,8 @@ class SnakeGameState {
             default:
                 console.log("ERROR in playOneStep() method: unknown direction memorized in current snake state!");
         }
-        if(this._isCollision(newRow, newCol)){ // If we crash, stop game and return result score
-            return this.stopGame();
+        if(this._isCollision(newRow, newCol)){ // If we crash, return result score
+            return this._currentScore;
         }
         this._currentSnakeState.body.unshift({ // Add new head to state and screen
             row: newRow,
@@ -79,6 +87,7 @@ class SnakeGameState {
         } else { // If it's not food, delete snake's tail
             this._deleteRect(this._currentSnakeState.body.pop().elem);
         }
+        document.getElementById(config.scoreDisplayID).innerHTML = 'score: ' + this._currentScore;
         return -1; // Return -1 to indicate that game hasn't finished
     }
     
