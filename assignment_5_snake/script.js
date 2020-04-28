@@ -23,7 +23,6 @@ class SnakeGameState {
             col: 0,
             elem: 0
         }
-
         this._initDrawSnake();
         this._spawnRandomFood();
     }
@@ -37,21 +36,72 @@ class SnakeGameState {
         this._currentSnakeState.curDirection = direction;
     }
     
+    /**
+     * Simulates one turn of playing. Moves snake by one tile.
+     * If snake dies, calls stopGame() and returns score.
+     * If snake eats food, adds to score and "adds" a new tail to the snake.
+     * If snake doesn't die, returns -1 to indicate that game hasn't finished yet.
+     * 
+     * @returns {number}  Final score(>=0) if game has finished. returns -1 if game hasn't finished.
+     */
     playOneStep(){
-
-
+        // Last state of head
+        let newRow = this._currentSnakeState.body[0].row;
+        let newCol = this._currentSnakeState.body[0].col;
+        switch(this._currentSnakeState.curDirection){ // Get new position
+            case config.dirTop:
+                newRow--;
+                break;
+            case config.dirDown:
+                newRow++;
+                break;
+            case config.dirLeft:
+                newCol--;
+                break;
+            case config.dirRight:
+                newCol++;
+                break;
+            default:
+                console.log("ERROR in playOneStep() method: unknown direction memorized in current snake state!");
+        }
+        if(this._isCollision(newRow, newCol)){ // If we crash, stop game and return result score
+            return this.stopGame();
+        }
+        this._currentSnakeState.body.unshift({ // Add new head to state and screen
+            row: newRow,
+            col: newCol,
+            elem: this._drawRect(newRow, newCol, config.snakeColor)
+        });
+        if(this._isFood(newRow, newCol)){ // If it's food, add 1 to current score
+            this._currentScore++;
+        } else { // If it's not food, delete snake's tail
+            this._deleteRect(this._currentSnakeState.body.pop().elem);
+        }
+        return -1; // Return -1 to indicate that game hasn't finished
     }
-
-    // Store score in localstorage if it's max
-    // Returns score
-    stop(direction){
+    
+    /**
+     * This is basically a destructor. *DO NOT* call any methods after calling this one.
+     * Clears screen and returns accumulated score.
+     * 
+     * @returns {number}  Score accumulated in current game
+     */
+    stopGame(){
+        // Store score in localstorage if it's max
+        if(this._currentScore > SnakeGameState.getMaxScore()) this._setMaxScore(this._currentScore);
+        // Delete snake
+        this._currentSnakeState.body.map(entry => {
+            this._deleteRect(entry.elem);
+        });
+        // Delete food
+        this._deleteRect(this._food.elem);
         return this._currentScore;
     }
 
     /**
-     * @returns Max game score stored in localstorage
+     * @returns {number}  Max game score stored in localstorage
      */
-    getMaxScore(){
+    static getMaxScore(){
         return localStorage.getItem(config.maxScoreKey);
     }
 
@@ -90,7 +140,7 @@ class SnakeGameState {
     /**
      * @param {number} row  Row of the point to be checked
      * @param {number} col  Column of the point to be checked
-     * @returns             True if collision is going to happen, else returns false
+     * @returns {boolean}   True if collision is going to happen, else returns false
      */
     _isCollision(row, col){
         // Check for collision with walls
@@ -100,6 +150,15 @@ class SnakeGameState {
             return true;
         }
         return false;
+    }
+
+    /**
+     * @param {number} row  Number of the row to be checked
+     * @param {number} col  Number of the row to be checked
+     * @returns {boolean}   True if there is a food on the passed position, returns false otherwise.
+     */
+    _isFood(row, col){
+        return row == this._food.row && col == this._food.col;
     }
 
     /**
@@ -115,9 +174,9 @@ class SnakeGameState {
      * Receives position and color of rectangle. Adds a new div
      * of that color on screen and returns the new element
      * 
-     * @param {number} row    // Screen row number
-     * @param {number} col    // Screen column number
-     * @param {string} color  // Color of the new rectangle
+     * @param {number} row     Screen row number
+     * @param {number} col     Screen column number
+     * @param {string} color   Color of the new rectangle
      */
     _drawRect(row, col, color){
         const elem = document.createElement('div');
@@ -149,3 +208,6 @@ const game = new SnakeGameState(config.numRows, config.numColumns, config.rectSi
 // console.log(game.getMaxScore());
 // game._setMaxScore(5);
 // console.log(game.getMaxScore());
+// console.log(game.stopGame());
+// game.playOneStep();
+// game.playOneStep();
