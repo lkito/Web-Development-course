@@ -9,6 +9,20 @@
 <body>
     <section class="section--general">
         <div class="container--general">
+            <div class="control-items center-items--general">
+                <div class="control-items__dimensions center-items--general">
+                    <input class="config-input" id="row-field" type="text" placeholder="# of rows (min/max: 10/60)">
+                    <input class="config-input" id="column-field" type="text" placeholder="# of columns (min/max: 10/100)">
+                </div>
+                <div class="control-items__speed center-items--general">
+                    <div class="control-items__speed__label">Adjust speed:</div>
+                    <input type="range" min="1" max="10" value="5" class="slider" id="speed-range" onkeydown="event.preventDefault()">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section--general">
+        <div class="container--general">
             <div class="center-items--general">
                 <input id="start-button" type="button" class="btn item--control-button" value="(S)tart">
                 <input id="pause-button" type="button" class="btn item--control-button" value="(P)ause">

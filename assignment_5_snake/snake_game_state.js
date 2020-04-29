@@ -152,9 +152,9 @@ class SnakeGameState {
     }
 
     /**
-     * @param {number} row  Row of the point to be checked
-     * @param {number} col  Column of the point to be checked
-     * @returns {boolean}   True if collision is going to happen, else returns false
+     * @param {number} row    Row of the point to be checked
+     * @param {number} col    Column of the point to be checked
+     * @returns {boolean}     True if collision is going to happen, else returns false
      */
     _isCollision(row, col){
         // Check for collision with walls
@@ -167,9 +167,9 @@ class SnakeGameState {
     }
 
     /**
-     * @param {number} row  Number of the row to be checked
-     * @param {number} col  Number of the row to be checked
-     * @returns {boolean}   True if there is a food on the passed position, returns false otherwise.
+     * @param {number} row    Number of the row to be checked
+     * @param {number} col    Number of the row to be checked
+     * @returns {boolean}     True if there is a food on the passed position, returns false otherwise.
      */
     _isFood(row, col){
         return row == this._food.row && col == this._food.col;
