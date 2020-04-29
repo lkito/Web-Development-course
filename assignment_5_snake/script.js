@@ -41,7 +41,7 @@ function reset(){ // Stop playing game and get game state ready for the new game
     game.stopGame();
     let newRows = document.getElementById(config.rowInputID).value;
     let newCols = document.getElementById(config.colInputID).value;
-    if(isNaN(newRows) || isNaN(newCols) || newRows < 10 || newCols < 10 || newRows > 60 || newCols > 100){
+    if(isNaN(newRows) || isNaN(newCols) || newRows < 10 || newCols < 10 || newRows > 40 || newCols > 100){
         newRows = config.numRows;
         newCols = config.numColumns;
     }
